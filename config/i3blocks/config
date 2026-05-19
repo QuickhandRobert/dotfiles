@@ -1,0 +1,38 @@
+separator_block_width=15
+markup=pango
+color=#c6c6c6
+[mediaplayer]
+command=$HOME/.config/i3blocks/scripts/mediaplayer
+interval=5
+signal=10
+[volume]
+command=$HOME/.config/i3blocks/scripts/volume
+interval=1
+[powerprofiles]
+command=powerprofilesctl get
+interval=10
+markup=plain
+[battery]
+command=$HOME/.config/i3blocks/scripts/battery
+interval=60
+[WIFI]
+command=iwgetid -r | awk '{print "ᯤ " $i}'
+interval=60
+align=center
+[bandwidth]
+command=$HOME/.config/i3blocks/scripts/bandwidth
+interval=30
+[cpu_usage]
+command=echo 100 - $(mpstat | tail -1 | awk '{print $13 "-" $7}')| bc | awk '{print "CPU: " $1 "%"}'
+interval=10
+#min_width=CPU: 100.00%
+#T_WARN=50
+#T_CRIT=80
+#DECIMALS=2
+[memory]
+command=free -mh | sed -n '2p' | awk '{print $3}'
+separator=true
+interval=30
+[timedate]
+command=date +"%d/%m/%y %R"
+interval=30

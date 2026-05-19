@@ -1,0 +1,2 @@
+#!/bin/bash
+wmenu-run -N "#000000" -n "#DADADA" -S "#006773" -s "#FBFBFB" -M "#000000" -m "#FBFBFB"

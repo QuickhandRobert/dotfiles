@@ -1,0 +1,4 @@
+#!/bin/bash
+jay run-privileged swaylock
+sleep 1
+systemctl hibernate

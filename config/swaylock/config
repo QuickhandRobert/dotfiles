@@ -1,0 +1,13 @@
+ignore-empty-password
+show-failed-attempts
+daemonize
+fingerprint
+#indicator-idle-visible
+show-keyboard-layout
+color=000000
+inside-color=8a8a8a
+ring-color=006773
+key-hl-color=000000
+#image=~/.config/resources/wallpaper.jpg
+font-size=12
+scaling=fill

@@ -1,0 +1,206 @@
+#Keymap & Layouts
+keymap.rmlvo = {
+    layout = "us, ir",
+    options = "grp:alt_shift_toggle",
+}
+keymap.shortcuts-group = 0 
+#----------------------------------------------
+#Init
+on-graphics-initialized = [
+    { type = "exec", exec = "mako" },
+    { type = "exec", exec = "wl-tray-bridge" },
+    { type = "exec", exec = ["swaybg", "-i", "/home/farbod/.config/resources/wallpaper.jpg",] },
+    {
+        type = "exec",
+        exec = {
+            shell = "wl-paste --watch cliphist store",
+            privileged = true,
+        },
+    },
+    {
+        type = "exec",
+        exec = {
+            shell = "wl-clip-persist --clipboard regular",
+            privileged = true,
+        },
+    },
+    {
+        type = "exec",
+        exec = {
+            shell = "wlsunset -l 28.9 -L 50.9 -t 5000",
+            privileged = true,
+        },
+    },
+]
+#----------------------------------------------
+#Etc
+#auto-reload = true
+workspace-display-order = "sorted"
+#----------------------------------------------
+#Idle Settings
+idle = {
+    minutes = 5,
+    grace-period = { seconds = 5 },
+}
+on-idle = {
+    type = "exec",
+    exec = {
+        shell = "swaylock && sleep 1 && systemctl sleep",
+        privileged = true,
+    },
+}
+#----------------------------------------------
+#Input Settings
+[[inputs]]
+match.name = "RAPOO 3.0MS"
+transform-matrix = [[0.85, 0], [0, 0.85]]
+accel-profile = "Flat"
+accel-speed = 0.0
+#----------------------------------------------
+#Appearance
+[theme]
+bar-bg-color="#000000"
+focused-title-bg-color="#006773"
+unfocused-title-bg-color="#000000"
+separator-color="#000000"
+border-width=0
+title-height=20
+font = "RobotoMonoNerdFontPropo Regular"
+#----------------------------------------------
+#Environment Variables
+[env]
+QT_QPA_PLATFORM = "wayland"
+QT_QPA_PLATFORMTHEME = "qt6ct"
+GTK_THEME = "Breeze-Dark"
+#----------------------------------------------
+#Status bar
+[status]
+format = "i3bar"
+exec = "i3blocks"
+i3bar-separator = " | "
+#----------------------------------------------
+#Volume Buttons
+[complex-shortcuts.XF86AudioRaiseVolume]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["pactl", "set-sink-volume", "0", "+5%"],
+}
+
+[complex-shortcuts.XF86AudioLowerVolume]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["pactl", "set-sink-volume", "0", "-5%"],
+}
+[complex-shortcuts.XF86AudioMute]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["pactl", "set-sink-mute", "0", "toggle"],
+}
+[complex-shortcuts.XF86Launch1]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["playerctl", "play-pause", "2>", "/dev/null"],
+}
+[complex-shortcuts.XF86MonBrightnessUp]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["brightnessctl", "set", "+5%"],
+}
+[complex-shortcuts.XF86MonBrightnessDown]
+mod-mask = ""
+action = {
+    type = "exec",
+    exec = ["brightnessctl", "set", "5%-"],
+}
+#----------------------------------------------
+#Shortcuts
+[shortcuts]
+logo-Left = "focus-left"
+logo-Down = "focus-down"
+logo-Up = "focus-up"
+logo-Right = "focus-right"
+
+logo-ctrl-Right = { type = "resize", dx1 = 25, dx2 = 25}
+logo-shift-ctrl-Right = { type = "resize", dx1 = 80, dx2 = 80}
+logo-ctrl-Left = { type = "resize", dx1 = -25, dx2 = -25}
+logo-shift-ctrl-Left = { type = "resize", dx1 = -80, dx2 = -80}
+
+logo-ctrl-Up = { type = "resize", dy1 = -25, dy2 = -25}
+logo-shift-ctrl-Up = { type = "resize", dy1 = -80, dy2 = -80}
+logo-ctrl-Down = { type = "resize", dy1 = 25, dy2 = 25}
+logo-shift-ctrl-Down = { type = "resize", dy1 = 80, dy2 = 80}
+
+
+logo-shift-Left = "move-left"
+logo-shift-Down = "move-down"
+logo-shift-Up = "move-up"
+logo-shift-Right = "move-right"
+
+logo-w = "split-horizontal"
+logo-s = "split-vertical"
+
+logo-r = "toggle-split"
+logo-e = "toggle-mono"
+logo-f = "toggle-fullscreen"
+
+logo-q = "close"
+
+#logo- = "focus-parent"
+#logo-logo- = "toggle-floating"
+#alt-q = "quit"
+#alt-shift-r = "reload-config-toml"
+
+
+logo-Return = { type = "exec", exec = "kitty" }
+logo-space = { type = "exec", exec = "wmenu_black"}
+logo-l = { type = "exec",
+    exec = {
+        shell = "swaylock",
+        privileged = true,
+}, }
+logo-o = { type = "exec",
+    exec = {
+        shell = "swaylock && sleep 1 && systemctl sleep",
+        privileged = true,
+}, }
+Print = { type = "exec",
+    exec = {
+        shell = "hyprshot -m region -o ~/Pictures/Screenshots",
+        privileged = true,
+}, }
+logo-v = { type = "exec",
+    exec = {
+        shell = "rofi -modi clipboard:~/.config/cliphist/scripts/cliphist-img-rofi -show clipboard -show-icons",
+        privileged = true,
+}, }
+logo-i = { type = "exec",
+    exec = ["pkill", "-SIGUSR1", "wlsunset",],
+}
+logo-shift-F1 = { type = "exec", exec = ["powerprofilesctl", "set", "power-saver"],}
+logo-shift-F2 = { type = "exec", exec = ["powerprofilesctl", "set", "balanced"],}
+logo-shift-F3 = { type = "exec", exec = ["powerprofilesctl", "set", "performance"],}
+
+
+logo-1 = { type = "show-workspace", name = "1" }
+logo-2 = { type = "show-workspace", name = "2" }
+logo-3 = { type = "show-workspace", name = "3" }
+logo-4 = { type = "show-workspace", name = "4" }
+logo-5 = { type = "show-workspace", name = "5" }
+logo-6 = { type = "show-workspace", name = "6" }
+logo-7 = { type = "show-workspace", name = "7" }
+logo-8 = { type = "show-workspace", name = "8" }
+logo-9 = { type = "show-workspace", name = "9" }
+logo-shift-1 = { type = "move-to-workspace", name = "1" }
+logo-shift-2 = { type = "move-to-workspace", name = "2" }
+logo-shift-3 = { type = "move-to-workspace", name = "3" }
+logo-shift-4 = { type = "move-to-workspace", name = "4" }
+logo-shift-5 = { type = "move-to-workspace", name = "5" }
+logo-shift-6 = { type = "move-to-workspace", name = "6" }
+logo-shift-7 = { type = "move-to-workspace", name = "7" }
+logo-shift-8 = { type = "move-to-workspace", name = "8" }
+logo-shift-9 = { type = "move-to-workspace", name = "9" }

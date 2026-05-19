@@ -1,0 +1,47 @@
+#!/bin/bash
+
+COLOR="#c6c6c6" #Default Color
+
+LABEL="" #Default Label
+
+# Check if adapter present or not
+[[ $(acpi -a | grep "on-line") ]] && STATUS="Charging" || STATUS="Discharging"
+
+CURRENT=$(acpi -b) #Check current battery status
+PERCENT=$(echo $CURRENT | awk '{print $4}' | sed "s/[%,]//g")
+REMAINING=$(echo $CURRENT | awk '{print $5}')
+[[ -z $REMAINING ]] && TIME="" || TIME="[$REMAINING]"
+
+
+if [ "$STATUS" == "Charging" ]
+then
+	LABEL=⚡
+elif [ "$STATUS" == "Discharging" ]
+then
+	if [ $PERCENT -ge 80 ]
+	then
+		LABEL=
+	elif [ $PERCENT -ge 60 ]
+	then
+		LABEL=
+	elif [ $PERCENT -ge 40 ]
+	then
+		LABEL=
+	elif [ $PERCENT -ge 20 ]
+	then
+		LABEL=
+		COLOR="#ffab00"
+	elif [ $PERCENT -ge 10 ]
+	then
+		LABEL=
+		COLOR="#d8512e"
+	else
+		LABEL=
+		COLOR="#dd2c00"
+	fi
+fi
+DEFAULT="$LABEL</span> $PERCENT% $TIME" # Shows battery percentage and time remaining
+CAPACITY="$(upower -i $(upower -e | grep 'battery') | grep capacity | awk '{print $2}')" # Shows actual remaining capacity (life) of battery
+[ "$BLOCK_BUTTON" == 1 ] && STRING="<span color=\"skyblue\"><b><span></span> $CAPACITY</b></span>" \
+	|| STRING="<span color=\"$COLOR\"><b><span size=\"x-small\" color=\"grey\">$DEFAULT</b></span>"
+echo $STRING

@@ -1,0 +1,5 @@
+sort=+time
+background-color=#000000FF
+border-color=#006773
+format=<b>%a\n</b>%s
+anchor=bottom-right
