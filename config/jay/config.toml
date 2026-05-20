@@ -178,6 +178,13 @@ logo-v = { type = "exec",
         shell = "rofi -modi clipboard:~/.config/cliphist/scripts/cliphist-img-rofi -show clipboard -show-icons",
         privileged = true,
 }, }
+
+logo-period = { type = "exec",
+    exec = {
+    	shell = "rofi -modi emoji -show emoji"
+        privileged = true,
+}, }
+
 logo-i = { type = "exec",
     exec = ["pkill", "-SIGUSR1", "wlsunset",],
 }
