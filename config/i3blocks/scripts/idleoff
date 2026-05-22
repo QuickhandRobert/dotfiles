@@ -1,0 +1,8 @@
+#!/bin/env fish
+set ICON '🔒'
+set COLOR '#D8512E'
+if jay idle status | head -n 1 | grep "disabled" > /dev/null
+    echo "<span color=\"$COLOR\">$ICON IDLE OFF</span>"
+else
+    echo ""
+end

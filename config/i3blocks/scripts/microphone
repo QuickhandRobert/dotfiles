@@ -4,5 +4,5 @@ set COLOR '#D8512E'
 if wpctl status | grep "<" > /dev/null	
 	echo "<span color=\"$COLOR\">$ICON</span>"
 else
-	exit
+	echo ""
 end
